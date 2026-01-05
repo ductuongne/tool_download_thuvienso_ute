@@ -4,6 +4,22 @@ import requests
 import fitz  # PyMuPDF
 import os
 
+
+logo = """ 
+\033[1;36m                     ██░ ██  ▄▄▄       ▄████▄   ██░ ██  ██▓ ███▄ ▄███▓ ▄▄▄       ███▄    █ 
+                    ▓██░ ██▒▒████▄    ▒██▀ ▀█  ▓██░ ██▒▓██▒▓██▒▀█▀ ██▒▒████▄     ██ ▀█   █ 
+                    ▒██▀▀██░▒██  ▀█▄  ▒▓█    ▄ ▒██▀▀██░▒██▒▓██    ▓██░▒██  ▀█▄  ▓██  ▀█ ██▒
+\033[1;93m                    ░▓█ ░██ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒░▓█ ░██ ░██░▒██    ▒██ ░██▄▄▄▄██ ▓██▒  ▐▌██▒
+                    ░▓█▒░██▓ ▓█   ▓██▒▒ ▓███▀ ░░▓█▒░██▓░██░▒██▒   ░██▒ ▓█   ▓██▒▒██░   ▓██░
+                    ▒ ░░▒░▒ ▒▒   ▓▒█░░ ░▒ ▒  ░ ▒ ░░▒░▒░▓  ░ ▒░   ░  ░ ▒▒   ▓▒█░░ ▒░   ▒ ▒ 
+                    ▒ ░▒░ ░  ▒   ▒▒ ░  ░  ▒    ▒ ░▒░ ░ ▒ ░░  ░      ░  ▒   ▒▒ ░░ ░░   ░ ▒░
+                    ░  ░░ ░  ░   ▒   ░         ░  ░░ ░ ▒ ░░      ░     ░   ▒      ░   ░ ░ 
+                    ░  ░  ░      ░  ░░ ░       ░  ░  ░ ░         ░         ░  ░         ░ 
+                                    ░                                                              
+                                TOOL DOWNLOAD TÀI LIỆU THƯ VIỆN SỐ UTE BY @ductuongug                   
+"""
+
+
 def clean_base64(raw_text: str) -> str:
     """Làm sạch chuỗi: chỉ giữ lại ký tự Base64 hợp lệ (A-Z, a-z, 0-9, +, /, =)"""
     return re.sub(r'[^A-Za-z0-9+/=]', '', raw_text)
@@ -63,7 +79,7 @@ def download_and_extract(url: str, output_pdf: str = "extracted.pdf", render: bo
         print(f"Lưu PDF thành công nhưng không mở được (có thể không phải PDF): {e}")
 
 def main():
-    print("Tool extract PDF từ URL chứa chuỗi Base64\n")
+    print(logo)
     
     url = input("Nhập URL: ").strip()
     if not url:
