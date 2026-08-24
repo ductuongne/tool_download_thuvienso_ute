@@ -16,7 +16,7 @@ logo = """
                     ░  ░░ ░  ░   ▒   ░         ░  ░░ ░ ▒ ░░      ░     ░   ▒      ░   ░ ░ 
                     ░  ░  ░      ░  ░░ ░       ░  ░  ░ ░         ░         ░  ░         ░ 
                                     ░                                                              
-                                TOOL DOWNLOAD TÀI LIỆU THƯ VIỆN SỐ UTE BY @ductuongug                   
+                              TOOL DOWNLOAD TÀI LIỆU THƯ VIỆN SỐ UTE BY @ductuongug                   
 """
 
 
@@ -30,9 +30,9 @@ def clean_url(raw_url: str) -> str:
     return m.group(1) if m else ""
 
 def download_and_extract(url: str, output_pdf: str = "extracted.pdf", render: bool = False, page_num: int = 1):
-    print(f"Đang tải nội dung từ: {url}")
+    print(f"Đang tải nội dung")
     try:
-        response = requests.get(url, timeout=30)
+        response = requests.get(url, timeout=120)
         response.raise_for_status()
     except requests.RequestException as e:
         print(f"Lỗi khi tải URL: {e}")
@@ -41,14 +41,11 @@ def download_and_extract(url: str, output_pdf: str = "extracted.pdf", render: bo
 
     raw_text = response.text
     clean_str = clean_base64(raw_text)
-    
-    print(f"Độ dài chuỗi Base64 sau clean: {len(clean_str)} ký tự")
+
 
     try:
         pdf_bytes = base64.b64decode(clean_str, validate=True)
     except base64.binascii.Error as e:
-        print(f"Lỗi decode Base64: {e}")
-        print("Chuỗi không phải Base64 hợp lệ hoặc không phải PDF.")
         return
 
     # Lưu file PDF
@@ -79,8 +76,8 @@ def download_and_extract(url: str, output_pdf: str = "extracted.pdf", render: bo
         print(f"Lưu PDF thành công nhưng không mở được (có thể không phải PDF): {e}")
 
 def main():
+    os.system("cls" if os.name == "nt" else "clear")
     print(logo)
-    
     url = input("Nhập URL: ").strip()
     if not url:
         print("URL không được để trống!")
